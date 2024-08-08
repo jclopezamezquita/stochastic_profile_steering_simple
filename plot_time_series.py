@@ -44,4 +44,4 @@ def plot_resulting_profile(time, average_profile, standard_deviation_profile, Ma
     name_of_plot = 'average_profile_with_std_' + type_of_plot + '.png'
     plt.savefig('results/' + name_of_plot)
 
-    plt.show()
+    # plt.show()

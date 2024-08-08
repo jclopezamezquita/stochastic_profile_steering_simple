@@ -159,8 +159,8 @@ def stochastic_profile_steering_without_limits(time_data_file, agents_data_file,
     results['of'] = round(results['of'],2)
     
     print("Calculating initial average profile...")
-    print([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time])
-    print([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time])
+    print("Average profile: " + str([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time]))
+    print("Std. deviation: " + str([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time]))
     print("Initial OF - Algorithm 1: " + str(results['of']))
 
     # Plot results
@@ -208,15 +208,19 @@ def stochastic_profile_steering_without_limits(time_data_file, agents_data_file,
         ######################################################### Line 9 - Algorithm 1 ####################################################################
         ######################################################### Determine the best agent based on improvements  #########################################
 
-        # print(improvement_per_agent)
-        best_improvement_per_agent = -0.01
+        best_improvement_per_agent = 0.0
         best_agent = None
         for agent in data_agents:
             if best_improvement_per_agent < improvement_per_agent[agent]:
                 best_improvement_per_agent = improvement_per_agent[agent]
                 best_agent = agent
-        print("Best agent - Algorithm 1: " + best_agent)
-        total_improvement = best_improvement_per_agent
+        if best_agent is None:
+            print("Best agent - Algorithm 3: None")
+            break
+        else:
+            print("Best agent - Algorithm 3: " + best_agent)
+            total_improvement = best_improvement_per_agent
+            print("Total improvement: " + str(total_improvement))
 
         ######################################################### Line 10 - Algorithm 1 ####################################################################
         ######################################################### Update the profile of the best agent  ####################################################
@@ -242,8 +246,8 @@ def stochastic_profile_steering_without_limits(time_data_file, agents_data_file,
         
         print("Calculating updated average profile...")
 
-        print([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time])
-        print([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time])
+        print("Average profile: " + str([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time]))
+        print("Std. deviation: " + str([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time]))
         print("Iteration " + str(iteration) + ", updated OF - Algorithm 1: " + str(results['of']))
 
         # Plot results
@@ -330,8 +334,8 @@ def stochastic_profile_steering_with_limits(time_data_file, agents_data_file, pa
     
     print("Calculating initial average profile...")
 
-    print([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time])
-    print([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time])
+    print("Average profile: " + str([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time]))
+    print("Std. deviation: " + str([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time]))
     print("Initial OF - Algorithm 2: " + str(results['of']))
 
     ######################################################### Line 3 - Algorithm 2 #####################################################################
@@ -373,14 +377,19 @@ def stochastic_profile_steering_with_limits(time_data_file, agents_data_file, pa
         ######################################################### Line 9 - Algorithm 2 ####################################################################
         ######################################################### Determine the best agent based on improvements  #########################################
 
-        best_improvement_per_agent = -0.01
+        best_improvement_per_agent = 0.0
         best_agent = None
         for agent in data_agents:
             if best_improvement_per_agent < improvement_per_agent[agent]:
                 best_improvement_per_agent = improvement_per_agent[agent]
                 best_agent = agent
-        print("Best agent - Algorithm 2: " + best_agent)
-        total_improvement = best_improvement_per_agent
+        if best_agent is None:
+            print("Best agent - Algorithm 3: None")
+            break
+        else:
+            print("Best agent - Algorithm 3: " + best_agent)
+            total_improvement = best_improvement_per_agent
+            print("Total improvement: " + str(total_improvement))
 
         ######################################################### Line 10 - Algorithm 2 ####################################################################
         ######################################################### Update the profile of the best agent  ####################################################
@@ -406,12 +415,8 @@ def stochastic_profile_steering_with_limits(time_data_file, agents_data_file, pa
 
         print("Calculating updated average profile...")
 
-        # print(results["Aggregated"]['x_demand_avg'])
-        # print(results["Aggregated"]['x_demand_std'])
-        # print("Iteration " + str(iteration) + ", updated OF: " + str(results['of']))
-
-        print([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time])
-        print([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time])
+        print("Average profile: " + str([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time]))
+        print("Std. deviation: " + str([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time]))
         print("Iteration " + str(iteration) + ", updated OF - Algorithm 2: " + str(results['of']))
         
     ######################################################### Line 12 - Algorithm 2 ####################################################################
@@ -419,12 +424,8 @@ def stochastic_profile_steering_with_limits(time_data_file, agents_data_file, pa
 
     print("Calculating final average profile...")
 
-    # print(results["Aggregated"]['x_demand_avg'])
-    # print(results["Aggregated"]['x_demand_std'])
-    # print("Final OF: " + str(results['of']))
-
-    print([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time])
-    print([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time])
+    print("Average profile: " + str([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time]))
+    print("Std. deviation: " + str([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time]))
     print("Final OF - Algorithm 2: " + str(results['of']))
 
     # Plot results
@@ -502,8 +503,8 @@ def stochastic_profile_steering(time_data_file, agents_data_file, parameters_fil
     
     print("Calculating probablistic grid limit violations...")
 
-    print([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time])
-    print([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time])
+    print("Average profile: " + str([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time]))
+    print("Std. deviation: " + str([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time]))
     print("Total grid limit violations: " + str(results['of']))
 
     ######################################################### Lines 2 - 3 - Algorithm 3 #####################################################################
@@ -541,6 +542,7 @@ def stochastic_profile_steering(time_data_file, agents_data_file, parameters_fil
     print("############## Starting Algorithm 3 - SPS ######################")
 
     # Update state variables and of
+    results['of'] = 0.0
     for time in data_time:
         results["Aggregated"]['x_demand_avg'][time] = 0.0
         results["Aggregated"]['x_demand_std'][time] = 0.0
@@ -554,7 +556,6 @@ def stochastic_profile_steering(time_data_file, agents_data_file, parameters_fil
         results["Aggregated"]['x_demand_std'][time] = round(results["Aggregated"]['x_demand_std'][time],2)
         results['of'] = results['of'] + results["Aggregated"]['x_demand_avg'][time]**2
     results['of'] = round(results['of'],2)
-    # print(results['of'])
     
     ######################################################### Line 8 - Algorithm 3 #####################################################################
     ######################################################### Initialize improvement ###################################################################
@@ -595,15 +596,19 @@ def stochastic_profile_steering(time_data_file, agents_data_file, parameters_fil
         ######################################################### Line 15 - Algorithm 3 ####################################################################
         ######################################################### Determine the best agent based on improvements  #########################################
 
-        best_improvement_per_agent = -100000000
+        best_improvement_per_agent = 0.0
         best_agent = None
         for agent in data_agents:
             if best_improvement_per_agent < improvement_per_agent[agent]:
                 best_improvement_per_agent = improvement_per_agent[agent]
                 best_agent = agent
-        print("Best agent - Algorithm 3: " + best_agent)
-        total_improvement = best_improvement_per_agent
-        print("Total improvement: " + str(total_improvement))
+        if best_agent is None:
+            print("Best agent - Algorithm 3: None")
+            break
+        else:
+            print("Best agent - Algorithm 3: " + best_agent)
+            total_improvement = best_improvement_per_agent
+            print("Total improvement: " + str(total_improvement))
 
         ######################################################### Line 16 - Algorithm 3 ####################################################################
         ######################################################### Update the profile of the best agent  ####################################################
@@ -629,12 +634,8 @@ def stochastic_profile_steering(time_data_file, agents_data_file, parameters_fil
 
         print("Calculating updated average profile...")
 
-        # print(results["Aggregated"]['x_demand_avg'])
-        # print(results["Aggregated"]['x_demand_std'])
-        # print("Iteration " + str(iteration) + ", updated OF: " + str(results['of']))
-
-        print([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time])
-        print([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time])
+        print("Average profile: " + str([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time]))
+        print("Std. deviation: " + str([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time]))
         print("Iteration " + str(iteration) + ", updated OF - Algorithm 3: " + str(results['of']))
         
     ######################################################### Line 18 - Algorithm 3 ####################################################################
@@ -642,12 +643,8 @@ def stochastic_profile_steering(time_data_file, agents_data_file, parameters_fil
 
     print("Calculating final average profile...")
 
-    # print(results["Aggregated"]['x_demand_avg'])
-    # print(results["Aggregated"]['x_demand_std'])
-    # print("Final OF: " + str(results['of']))
-
-    print([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time])
-    print([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time])
+    print("Average profile: " + str([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time]))
+    print("Std. deviation: " + str([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time]))
     print("Final OF - Algorithm 3: " + str(results['of']))
 
     # Plot results
