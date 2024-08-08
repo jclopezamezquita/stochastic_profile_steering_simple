@@ -167,7 +167,7 @@ def stochastic_profile_steering_without_limits(time_data_file, agents_data_file,
     plot_resulting_profile(time=data_time, 
         average_profile=[round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time], 
         standard_deviation_profile=[round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time],
-        Max_Y=LIMIT, type_of_plot='Intial', fo_value=results['of'])
+        Max_Y=LIMIT, type_of_plot='initial', fo_value=results['of'])
 
     ######################################################### Line 3 - Algorithm 1 #####################################################################
     ######################################################### Initialize improvement ###################################################################

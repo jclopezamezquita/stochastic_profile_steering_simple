@@ -50,13 +50,13 @@ def household_EMS_initial(delta_T, agent_name, data_time, data_agent):
         result = solver.solve(model, tee=False)
     except:
         print('Error while executing solver!!!!')
-        x_demand_avg = []
-        x_demand_std = []
+        x_demand_avg = {}
+        x_demand_std = {}
         for t in T:
-            x_demand_avg.append(0)
-            x_demand_std.append(0)
+            x_demand_avg[t] = 0
+            x_demand_std[t] = 0
 
-        return x_demand_avg, x_demand_std, None
+        return x_demand_avg, x_demand_std, 100000000
 
     print('The solution status is ' + result.solver.status + ', and termination condition is ' + result.solver.termination_condition)
 
@@ -128,13 +128,13 @@ def household_EMS_without_limits(delta_T, agent_name, data_time, data_agent, agg
         result = solver.solve(model, tee=False)
     except:
         print('Error while executing solver!!!!')
-        x_demand_avg = []
-        x_demand_std = []
+        x_demand_avg = {}
+        x_demand_std = {}
         for t in T:
-            x_demand_avg.append(0)
-            x_demand_std.append(0)
+            x_demand_avg[t] = 0
+            x_demand_std[t] = 0
 
-        return x_demand_avg, x_demand_std, None
+        return x_demand_avg, x_demand_std, 100000000
 
     print('The solution status is ' + result.solver.status + ', and termination condition is ' + result.solver.termination_condition)
 
@@ -211,13 +211,13 @@ def household_EMS_with_limits(delta_T, agent_name, data_time, data_agent, aggreg
         result = solver.solve(model, tee=False)
     except:
         print('Error while executing solver!!!!')
-        x_demand_avg = []
-        x_demand_std = []
+        x_demand_avg = {}
+        x_demand_std = {}
         for t in T:
-            x_demand_avg.append(0)
-            x_demand_std.append(0)
+            x_demand_avg[t] = 0
+            x_demand_std[t] = 0
 
-        return x_demand_avg, x_demand_std, None
+        return x_demand_avg, x_demand_std, 100000000
 
     print('The solution status is ' + result.solver.status + ', and termination condition is ' + result.solver.termination_condition)
 
@@ -291,13 +291,13 @@ def household_EMS_total(delta_T, agent_name, data_time, data_agent, aggregated_d
         result = solver.solve(model, tee=False)
     except:
         print('Error while executing solver!!!!')
-        x_demand_avg = []
-        x_demand_std = []
+        x_demand_avg = {}
+        x_demand_std = {}
         for t in T:
-            x_demand_avg.append(0)
-            x_demand_std.append(0)
+            x_demand_avg[t] = 0
+            x_demand_std[t] = 0
 
-        return x_demand_avg, x_demand_std, None
+        return x_demand_avg, x_demand_std, 100000000
 
     print('The solution status is ' + result.solver.status + ', and termination condition is ' + result.solver.termination_condition)
 

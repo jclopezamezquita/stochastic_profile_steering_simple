@@ -3,9 +3,9 @@ import shutil
 from tools import stochastic_profile_steering
 
 # Define the time_data and agents_data files
-time_data_file = 'input_data/time_data.json'
-agents_data_file = 'input_data/agents_data.json'
-parameters_file = 'input_data/parameters.json'
+time_data_file = 'input_data/data_15min/time_data_15min.json'
+agents_data_file = 'input_data/data_15min/agents_data_15min.json'
+parameters_file = 'input_data/data_15min/parameters_15min.json'
 
 # Create Estudos/ if not exists
 if not os.path.exists('results'):
@@ -15,7 +15,7 @@ if not os.path.exists('results'):
 dir_name = "results/"
 test = os.listdir(dir_name)
 for item in test:
-    if item.endswith(".csv") or item.endswith(".svg") or item.endswith(".eps"):
+    if item.endswith(".png"):
         os.remove(os.path.join(dir_name, item))
 
 if shutil.which("ipopt") or os.path.exists('ipopt'):
