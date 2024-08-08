@@ -250,12 +250,6 @@ def stochastic_profile_steering_without_limits(time_data_file, agents_data_file,
         print("Std. deviation: " + str([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time]))
         print("Iteration " + str(iteration) + ", updated OF - Algorithm 1: " + str(results['of']))
 
-        # Plot results
-        plot_resulting_profile(time=data_time, 
-            average_profile=[round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time], 
-            standard_deviation_profile=[round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time],
-            Max_Y=LIMIT, type_of_plot='SPS_without_limits', fo_value=results['of'])
-
 
     ######################################################### Line 12 - Algorithm 1 ####################################################################
     ######################################################### Show the optimized profile  ####################################################
@@ -265,6 +259,12 @@ def stochastic_profile_steering_without_limits(time_data_file, agents_data_file,
     print([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time])
     print([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time])
     print("Final OF - Algorithm 1: " + str(results['of']))
+
+    # Plot results
+    plot_resulting_profile(time=data_time, 
+        average_profile=[round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time], 
+        standard_deviation_profile=[round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time],
+        Max_Y=LIMIT, type_of_plot='SPS_without_limits', fo_value=results['of'])
 
     return results
 
