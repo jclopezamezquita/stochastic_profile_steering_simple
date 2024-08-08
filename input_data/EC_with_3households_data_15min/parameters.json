@@ -1,5 +1,5 @@
 {
-    "DELTA_TIME" : 0.25,
+    "DELTA_TIME_hours" : 0.25,
     "TOLERANCE" : 1.0,
-    "LIMIT" : 3.3
+    "GRID_LIMIT_kW" : 3.3
 }

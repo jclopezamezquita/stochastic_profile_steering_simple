@@ -17,7 +17,7 @@ def collect_data_from_files(time_data_file, agents_data_file, parameters_file):
     with open(parameters_file, 'r') as openfile:
         parameters = json.load(openfile)
 
-    return data_time, data_agents, parameters["DELTA_TIME"], parameters["TOLERANCE"], parameters["LIMIT"] 
+    return data_time, data_agents, parameters["DELTA_TIME_hours"], parameters["TOLERANCE"], parameters["GRID_LIMIT_kW"] 
 
 
 def stochastic_profile_steering_initial_profile(time_data_file, agents_data_file, parameters_file):

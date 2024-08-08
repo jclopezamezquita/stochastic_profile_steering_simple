@@ -1,9 +1,13 @@
 import os, sys
 import shutil
 from tools import stochastic_profile_steering
+import sys
+
+# parse command ine argument
+user_input = sys.argv[1:]
 
 # Define tha data folder
-data_folder = 'EC_with_3households_data_15min'
+data_folder = user_input[0]
 
 # Define the time_data and agents_data files
 time_data_file = f'input_data/{data_folder}/time_data.json'
