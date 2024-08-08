@@ -250,6 +250,9 @@ def stochastic_profile_steering_without_limits(time_data_file, agents_data_file,
         print("Std. deviation: " + str([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time]))
         print("Iteration " + str(iteration) + ", updated OF - Algorithm 1: " + str(results['of']))
 
+        if iteration > 10:
+            break
+
 
     ######################################################### Line 12 - Algorithm 1 ####################################################################
     ######################################################### Show the optimized profile  ####################################################
@@ -418,6 +421,10 @@ def stochastic_profile_steering_with_limits(time_data_file, agents_data_file, pa
         print("Average profile: " + str([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time]))
         print("Std. deviation: " + str([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time]))
         print("Iteration " + str(iteration) + ", updated OF - Algorithm 2: " + str(results['of']))
+
+        if iteration > 10:
+            break
+
         
     ######################################################### Line 12 - Algorithm 2 ####################################################################
     ######################################################### Show the optimized profile  ####################################################
@@ -637,6 +644,9 @@ def stochastic_profile_steering(time_data_file, agents_data_file, parameters_fil
             print("Average profile: " + str([round(results["Aggregated"]['x_demand_avg'][time],2) for time in data_time]))
             print("Std. deviation: " + str([round(math.sqrt(results["Aggregated"]['x_demand_std'][time]),2) for time in data_time]))
             print("Iteration " + str(iteration) + ", updated OF - Algorithm 3: " + str(results['of']))
+
+            if iteration > 10:
+                break
             
     ######################################################### Line 18 - Algorithm 3 ####################################################################
     ######################################################### Show the optimized profile  ####################################################
