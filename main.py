@@ -2,13 +2,13 @@ import os, sys
 import shutil
 from tools import stochastic_profile_steering
 
+# Define tha data folder
+data_folder = 'EC_with_3households_data_15min'
+
 # Define the time_data and agents_data files
-time_data_file = 'input_data/EC_with_3households_data_15min/time_data_15min.json'
-agents_data_file = 'input_data/EC_with_3households_data_15min/agents_data_15min.json'
-parameters_file = 'input_data/EC_with_3households_data_15min/parameters_15min.json'
-# time_data_file = 'input_data/EC_with_3households_data_1hour/time_data_1hour.json'
-# agents_data_file = 'input_data/EC_with_3households_data_1hour/agents_data_1hour.json'
-# parameters_file = 'input_data/EC_with_3households_data_1hour/parameters_1hour.json'
+time_data_file = f'input_data/{data_folder}/time_data.json'
+agents_data_file = f'input_data/{data_folder}/agents_data.json'
+parameters_file = f'input_data/{data_folder}/parameters.json'
 
 # Create Estudos/ if not exists
 if not os.path.exists('results'):

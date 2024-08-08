@@ -15,15 +15,15 @@ def household_EMS_initial(delta_T, agent_name, data_time, data_agent):
     model.x = pyomo.Var(T,S)
     model.x_avg = pyomo.Var(T)
     model.x_std = pyomo.Var(T, domain=pyomo.NonNegativeReals)
-    model.power_BESS = pyomo.Var(T, bounds=(-data_agent['Buffer_Power'],data_agent['Buffer_Power']))
-    model.energy_BESS = pyomo.Var(T, domain=pyomo.NonNegativeReals, bounds=(0,data_agent['Buffer_Energy']))
+    model.power_BESS = pyomo.Var(T, bounds=(-data_agent['Buffer_Power_kW'],data_agent['Buffer_Power_kW']))
+    model.energy_BESS = pyomo.Var(T, domain=pyomo.NonNegativeReals, bounds=(0,data_agent['Buffer_Energy_kWh']))
     
     # Initial point
     for t in T:
         model.x_avg[t].value = 0.0
         model.x_std[t].value = 0.0
         for s in S:
-            model.x[t,s].value = data_agent['Scenarios'][s]['Timeseries'][t]
+            model.x[t,s].value = data_agent['Scenarios'][s]['Profile_kW'][t]
             model.x_avg[t].value = model.x_avg[t]() + data_agent['Scenarios'][s]['Probability'] * model.x[t,s]()
         for s in S:
             model.x_std[t].value = model.x_std[t]() + data_agent['Scenarios'][s]['Probability'] * (model.x[t,s]() - model.x_avg[t]())**2
@@ -40,7 +40,7 @@ def household_EMS_initial(delta_T, agent_name, data_time, data_agent):
         model.cons.add(model.x_std[t]**2 == sum( (data_agent['Scenarios'][s]['Probability'] * (model.x[t,s] - model.x_avg[t])**2) for s in S ))
         model.cons.add(model.energy_BESS[t] == model.energy_BESS[data_time[t]['ant']] + delta_T * model.power_BESS[t])
         for s in S:
-            model.cons.add(model.x[t,s] == model.power_BESS[t] + data_agent['Scenarios'][s]['Timeseries'][t])
+            model.cons.add(model.x[t,s] == model.power_BESS[t] + data_agent['Scenarios'][s]['Profile_kW'][t])
 
     # Optimization process
     solver = pyomo.SolverFactory('ipopt')
@@ -93,15 +93,15 @@ def household_EMS_without_limits(delta_T, agent_name, data_time, data_agent, agg
     model.x = pyomo.Var(T,S)
     model.x_avg = pyomo.Var(T)
     model.x_std = pyomo.Var(T, domain=pyomo.NonNegativeReals)
-    model.power_BESS = pyomo.Var(T, bounds=(-data_agent['Buffer_Power'],data_agent['Buffer_Power']))
-    model.energy_BESS = pyomo.Var(T, domain=pyomo.NonNegativeReals, bounds=(0,data_agent['Buffer_Energy']))
+    model.power_BESS = pyomo.Var(T, bounds=(-data_agent['Buffer_Power_kW'],data_agent['Buffer_Power_kW']))
+    model.energy_BESS = pyomo.Var(T, domain=pyomo.NonNegativeReals, bounds=(0,data_agent['Buffer_Energy_kWh']))
     
     # Initial point
     for t in T:
         model.x_avg[t].value = 0.0
         model.x_std[t].value = 0.0
         for s in S:
-            model.x[t,s].value = data_agent['Scenarios'][s]['Timeseries'][t]
+            model.x[t,s].value = data_agent['Scenarios'][s]['Profile_kW'][t]
             model.x_avg[t].value = model.x_avg[t]() + data_agent['Scenarios'][s]['Probability'] * model.x[t,s]()
         for s in S:
             model.x_std[t].value = model.x_std[t]() + data_agent['Scenarios'][s]['Probability'] * (model.x[t,s]() - model.x_avg[t]())**2
@@ -118,7 +118,7 @@ def household_EMS_without_limits(delta_T, agent_name, data_time, data_agent, agg
         model.cons.add(model.x_std[t]**2 == sum( (data_agent['Scenarios'][s]['Probability'] * (model.x[t,s] - model.x_avg[t])**2) for s in S ))
         model.cons.add(model.energy_BESS[t] == model.energy_BESS[data_time[t]['ant']] + delta_T * model.power_BESS[t])
         for s in S:
-            model.cons.add(model.x[t,s] == model.power_BESS[t] + data_agent['Scenarios'][s]['Timeseries'][t])
+            model.cons.add(model.x[t,s] == model.power_BESS[t] + data_agent['Scenarios'][s]['Profile_kW'][t])
 
     # Optimization process
     solver = pyomo.SolverFactory('ipopt')
@@ -171,8 +171,8 @@ def household_EMS_with_limits(delta_T, agent_name, data_time, data_agent, aggreg
     model.x = pyomo.Var(T,S)
     model.x_avg = pyomo.Var(T)
     model.x_std = pyomo.Var(T, domain=pyomo.NonNegativeReals)
-    model.power_BESS = pyomo.Var(T, bounds=(-data_agent['Buffer_Power'],data_agent['Buffer_Power']))
-    model.energy_BESS = pyomo.Var(T, domain=pyomo.NonNegativeReals, bounds=(0,data_agent['Buffer_Energy']))
+    model.power_BESS = pyomo.Var(T, bounds=(-data_agent['Buffer_Power_kW'],data_agent['Buffer_Power_kW']))
+    model.energy_BESS = pyomo.Var(T, domain=pyomo.NonNegativeReals, bounds=(0,data_agent['Buffer_Energy_kWh']))
     model.theta_1 = pyomo.Var(T, domain=pyomo.NonNegativeReals)
     model.theta_2 = pyomo.Var(T, domain=pyomo.NonNegativeReals)
     
@@ -181,7 +181,7 @@ def household_EMS_with_limits(delta_T, agent_name, data_time, data_agent, aggreg
         model.x_avg[t].value = 0.0
         model.x_std[t].value = 0.0
         for s in S:
-            model.x[t,s].value = data_agent['Scenarios'][s]['Timeseries'][t]
+            model.x[t,s].value = data_agent['Scenarios'][s]['Profile_kW'][t]
             model.x_avg[t].value = model.x_avg[t]() + data_agent['Scenarios'][s]['Probability'] * model.x[t,s]()
         for s in S:
             model.x_std[t].value = model.x_std[t]() + data_agent['Scenarios'][s]['Probability'] * (model.x[t,s]() - model.x_avg[t]())**2
@@ -201,7 +201,7 @@ def household_EMS_with_limits(delta_T, agent_name, data_time, data_agent, aggreg
         model.cons.add(model.x_std[t]**2 == sum( (data_agent['Scenarios'][s]['Probability'] * (model.x[t,s] - model.x_avg[t])**2) for s in S ))
         model.cons.add(model.energy_BESS[t] == model.energy_BESS[data_time[t]['ant']] + delta_T * model.power_BESS[t])
         for s in S:
-            model.cons.add(model.x[t,s] == model.power_BESS[t] + data_agent['Scenarios'][s]['Timeseries'][t])
+            model.cons.add(model.x[t,s] == model.power_BESS[t] + data_agent['Scenarios'][s]['Profile_kW'][t])
 
     # Optimization process
     solver = pyomo.SolverFactory('ipopt')
@@ -254,15 +254,15 @@ def household_EMS_total(delta_T, agent_name, data_time, data_agent, aggregated_d
     model.x = pyomo.Var(T,S)
     model.x_avg = pyomo.Var(T)
     model.x_std = pyomo.Var(T, domain=pyomo.NonNegativeReals)
-    model.power_BESS = pyomo.Var(T, bounds=(-data_agent['Buffer_Power'],data_agent['Buffer_Power']))
-    model.energy_BESS = pyomo.Var(T, domain=pyomo.NonNegativeReals, bounds=(0,data_agent['Buffer_Energy']))
+    model.power_BESS = pyomo.Var(T, bounds=(-data_agent['Buffer_Power_kW'],data_agent['Buffer_Power_kW']))
+    model.energy_BESS = pyomo.Var(T, domain=pyomo.NonNegativeReals, bounds=(0,data_agent['Buffer_Energy_kWh']))
     
     # Initial point
     for t in T:
         model.x_avg[t].value = 0.0
         model.x_std[t].value = 0.0
         for s in S:
-            model.x[t,s].value = data_agent['Scenarios'][s]['Timeseries'][t]
+            model.x[t,s].value = data_agent['Scenarios'][s]['Profile_kW'][t]
             model.x_avg[t].value = model.x_avg[t]() + data_agent['Scenarios'][s]['Probability'] * model.x[t,s]()
         for s in S:
             model.x_std[t].value = model.x_std[t]() + data_agent['Scenarios'][s]['Probability'] * (model.x[t,s]() - model.x_avg[t]())**2
@@ -281,7 +281,7 @@ def household_EMS_total(delta_T, agent_name, data_time, data_agent, aggregated_d
         model.cons.add(model.x_std[t]**2 == sum( (data_agent['Scenarios'][s]['Probability'] * (model.x[t,s] - model.x_avg[t])**2) for s in S ))
         model.cons.add(model.energy_BESS[t] == model.energy_BESS[data_time[t]['ant']] + delta_T * model.power_BESS[t])
         for s in S:
-            model.cons.add(model.x[t,s] == model.power_BESS[t] + data_agent['Scenarios'][s]['Timeseries'][t])
+            model.cons.add(model.x[t,s] == model.power_BESS[t] + data_agent['Scenarios'][s]['Profile_kW'][t])
 
     # Optimization process
     solver = pyomo.SolverFactory('ipopt')

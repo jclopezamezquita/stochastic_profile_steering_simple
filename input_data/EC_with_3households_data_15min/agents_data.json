@@ -1,11 +1,11 @@
 {
     "H01" : {
-        "Buffer_Energy" : 0,
-        "Buffer_Power" : 0,
+        "Buffer_Energy_kWh" : 0,
+        "Buffer_Power_kW" : 0,
         "Scenarios" : {
             "S1" : {
                 "Probability" : 0.33,
-                "Timeseries" : {
+                "Profile_kW" : {
                     "00:00": 1.00,
                     "00:15": 0.99,
                     "00:30": 0.98,
@@ -106,7 +106,7 @@
             },
             "S2" : {
                 "Probability" : 0.33,
-                "Timeseries" : {
+                "Profile_kW" : {
                     "00:00": 1.0,
                     "00:15": 1.0,
                     "00:30": 0.99,
@@ -207,7 +207,7 @@
             },
             "S3" : {
                 "Probability" : 0.33,
-                "Timeseries" : {
+                "Profile_kW" : {
                     "00:00": 1.00,
                     "00:15": 0.99,
                     "00:30": 0.97,
@@ -309,12 +309,12 @@
         }
     },
     "H02" : {
-        "Buffer_Energy" : 2,
-        "Buffer_Power" : 2,
+        "Buffer_Energy_kWh" : 2,
+        "Buffer_Power_kW" : 2,
         "Scenarios" : {
             "S1" : {
                 "Probability" : 0.33,
-                "Timeseries" : {
+                "Profile_kW" : {
                     "00:00": 1.00,
                     "00:15": 0.99,
                     "00:30": 0.98,
@@ -415,7 +415,7 @@
             },
             "S2" : {
                 "Probability" : 0.33,
-                "Timeseries" : {
+                "Profile_kW" : {
                     "00:00": 1.00,
                     "00:15": 1.0,
                     "00:30": 0.99,
@@ -516,7 +516,7 @@
             },
             "S3" : {
                 "Probability" : 0.33,
-                "Timeseries" : {
+                "Profile_kW" : {
                     "00:00": 1.00,
                     "00:15": 0.99,
                     "00:30": 0.97,
@@ -618,12 +618,12 @@
         }
     },
     "H03" : {
-        "Buffer_Energy" : 1,
-        "Buffer_Power" : 1,
+        "Buffer_Energy_kWh" : 1,
+        "Buffer_Power_kW" : 1,
         "Scenarios" : {
             "S1" : {
                 "Probability" : 0.33,
-                "Timeseries" : {
+                "Profile_kW" : {
                     "00:00": 1.00,
                     "00:15": 0.99,
                     "00:30": 0.98,
@@ -724,7 +724,7 @@
             },
             "S2" : {
                 "Probability" : 0.33,
-                "Timeseries" : {
+                "Profile_kW" : {
                     "00:00": 1.00,
                     "00:15": 1.0,
                     "00:30": 0.99,
@@ -825,7 +825,7 @@
             },
             "S3" : {
                 "Probability" : 0.33,
-                "Timeseries" : {
+                "Profile_kW" : {
                     "00:00": 1.00,
                     "00:15": 0.99,
                     "00:30": 0.97,
