@@ -1,6 +1,6 @@
 import os, sys
 import shutil
-import stochastic_profile_steering
+from tools import stochastic_profile_steering
 
 # Define the time_data and agents_data files
 time_data_file = 'input_data/time_data.json'

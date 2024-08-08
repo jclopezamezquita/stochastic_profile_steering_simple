@@ -1,7 +1,7 @@
 import math
 import json
-import household_EMS
-from plot_time_series import plot_resulting_profile
+from tools.household_EMS import *
+from tools.plot_time_series import plot_resulting_profile
 
 def collect_data_from_files(time_data_file, agents_data_file, parameters_file):
 
@@ -57,7 +57,7 @@ def stochastic_profile_steering_initial_profile(time_data_file, agents_data_file
     # Run optimization per agent
     for agent in data_agents:
         print("Agent " + agent + ":")
-        x_demand_avg, x_demand_std, of = household_EMS.household_EMS_initial(delta_T=DELTA_TIME, agent_name=agent, data_time=data_time, data_agent=data_agents[agent])
+        x_demand_avg, x_demand_std, of = household_EMS_initial(delta_T=DELTA_TIME, agent_name=agent, data_time=data_time, data_agent=data_agents[agent])
         # print(x_demand_avg)
         # print(x_demand_std)
 
@@ -130,7 +130,7 @@ def stochastic_profile_steering_without_limits(time_data_file, agents_data_file,
     # Run optimization per agent
     for agent in data_agents:
         print("Agent " + agent + ":")
-        x_demand_avg, x_demand_std, of = household_EMS.household_EMS_initial(delta_T=DELTA_TIME, agent_name=agent, data_time=data_time, data_agent=data_agents[agent])
+        x_demand_avg, x_demand_std, of = household_EMS_initial(delta_T=DELTA_TIME, agent_name=agent, data_time=data_time, data_agent=data_agents[agent])
         # print(x_demand_avg)
         # print(x_demand_std)
 
@@ -192,7 +192,7 @@ def stochastic_profile_steering_without_limits(time_data_file, agents_data_file,
             ######################################################### Optimize average consumption per agent ##################################################
 
             print("Agent " + agent + ":")
-            x_demand_avg, x_demand_std, of = household_EMS.household_EMS_without_limits(delta_T=DELTA_TIME, agent_name=agent, data_time=data_time, data_agent=data_agents[agent], aggregated_demand_avg=results["Aggregated"]['x_demand_avg'], demand_agent_avg=results[agent]['x_demand_avg'])
+            x_demand_avg, x_demand_std, of = household_EMS_without_limits(delta_T=DELTA_TIME, agent_name=agent, data_time=data_time, data_agent=data_agents[agent], aggregated_demand_avg=results["Aggregated"]['x_demand_avg'], demand_agent_avg=results[agent]['x_demand_avg'])
 
             # Save results
             results[agent]['of_temporal'] = of
@@ -304,7 +304,7 @@ def stochastic_profile_steering_with_limits(time_data_file, agents_data_file, pa
     # Run optimization per agent
     for agent in data_agents:
         print("Agent " + agent + ":")
-        x_demand_avg, x_demand_std, of = household_EMS.household_EMS_initial(delta_T=DELTA_TIME, agent_name=agent, data_time=data_time, data_agent=data_agents[agent])
+        x_demand_avg, x_demand_std, of = household_EMS_initial(delta_T=DELTA_TIME, agent_name=agent, data_time=data_time, data_agent=data_agents[agent])
         # print(x_demand_avg)
         # print(x_demand_std)
 
@@ -361,7 +361,7 @@ def stochastic_profile_steering_with_limits(time_data_file, agents_data_file, pa
             ######################################################### Optimize average consumption per agent ##################################################
 
             print("Agent " + agent + ":")
-            x_demand_avg, x_demand_std, of = household_EMS.household_EMS_with_limits(delta_T=DELTA_TIME, agent_name=agent, data_time=data_time, data_agent=data_agents[agent], aggregated_demand_avg=results["Aggregated"]['x_demand_avg'], demand_agent_avg=results[agent]['x_demand_avg'], aggregated_demand_std=results["Aggregated"]['x_demand_std'], demand_agent_std=results[agent]['x_demand_std'], grid_limit=LIMIT)
+            x_demand_avg, x_demand_std, of = household_EMS_with_limits(delta_T=DELTA_TIME, agent_name=agent, data_time=data_time, data_agent=data_agents[agent], aggregated_demand_avg=results["Aggregated"]['x_demand_avg'], demand_agent_avg=results[agent]['x_demand_avg'], aggregated_demand_std=results["Aggregated"]['x_demand_std'], demand_agent_std=results[agent]['x_demand_std'], grid_limit=LIMIT)
 
             # Save results
             results[agent]['of_temporal'] = of
@@ -580,7 +580,7 @@ def stochastic_profile_steering(time_data_file, agents_data_file, parameters_fil
                 ######################################################### Optimize average consumption per agent ##################################################
 
                 print("Agent " + agent + ":")
-                x_demand_avg, x_demand_std, of = household_EMS.household_EMS_total(delta_T=DELTA_TIME, agent_name=agent, data_time=data_time, data_agent=data_agents[agent], aggregated_demand_avg=results["Aggregated"]['x_demand_avg'], demand_agent_avg=results[agent]['x_demand_avg'], aggregated_demand_std=results["Aggregated"]['x_demand_std'], demand_agent_std=results[agent]['x_demand_std'], lower_limit_agent=results[agent]['lower_individual_limit'], upper_limit_agent=results[agent]['upper_individual_limit'], grid_limit=LIMIT)
+                x_demand_avg, x_demand_std, of = household_EMS_total(delta_T=DELTA_TIME, agent_name=agent, data_time=data_time, data_agent=data_agents[agent], aggregated_demand_avg=results["Aggregated"]['x_demand_avg'], demand_agent_avg=results[agent]['x_demand_avg'], aggregated_demand_std=results["Aggregated"]['x_demand_std'], demand_agent_std=results[agent]['x_demand_std'], lower_limit_agent=results[agent]['lower_individual_limit'], upper_limit_agent=results[agent]['upper_individual_limit'], grid_limit=LIMIT)
 
                 # Save results
                 results[agent]['of_temporal'] = of
